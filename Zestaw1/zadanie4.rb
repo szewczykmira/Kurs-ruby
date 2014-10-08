@@ -1,3 +1,4 @@
+# jeżeli przerobic na normalne to bedzie okey ;)
 def say_it(smth)
   number = smth.to_s
   array = number.split('')
