@@ -1,31 +1,21 @@
-# jeżeli przerobic na normalne to bedzie okey ;)
-def say_it(smth)
-  number = smth.to_s
-  array = number.split('')
-  for int in array
-    case int
-      when '1'
-        puts 'jeden'
-      when '2'
-        puts 'dwa'
-      when '3'
-        puts 'trzy'
-      when '4'
-        puts 'cztery'
-      when '5'
-        puts 'piec'
-      when '6'
-        puts 'szesc'
-      when '7'
-        puts 'siedem'
-      when '8'
-        puts 'osiem'
-      when '9'
-        puts 'dziewiec'
-      when '0'
-        puts 'zero'
+def rozklad(n)
+  if n == 1
+    return [1]
+  end
+  czynnik = 2
+  temp = []
+  while czynnik <= n
+    if n % czynnik == 0
+      if not temp.member?(czynnik)
+        temp.push(czynnik)
+      end
+      n /= czynnik
+    else
+      czynnik += 1
     end
   end
+  return temp
 end
 
-say_it(123)
+print rozklad(1025)
+print rozklad(121)

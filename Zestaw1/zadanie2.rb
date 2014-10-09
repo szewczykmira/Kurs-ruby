@@ -1,14 +1,12 @@
 def pascal(n)
-  (0..n).each{|r|
-    lst=[1]
-    term=1
-    k=1
-    (0..r-1).step(1){|index|
-      term=term*(r-k+1)/k
-      lst.push term
-      k+=1
-    }
-    p lst
-  }
+  p=[1]
+  while(p.length<=n)
+    puts p.join(" ")
+    p=Array.new(p.length+1) {|i|
+      a=i<p.length ? p[i] : 0
+      b=i>0 ? p[i-1] : 0
+      a+b}
+  end
 end
-pascal(4)
+
+puts pascal(10)

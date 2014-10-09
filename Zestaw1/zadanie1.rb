@@ -58,7 +58,9 @@ def slownie(n)
     number = number % 100
     wynik += setki[decimal]
   end
-
+  if number < 10
+    wynik += jednosci[number]
+  end
   if number / 10 == 1
     decimal = number % 100
     wynik += nastki[decimal]
