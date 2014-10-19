@@ -12,12 +12,10 @@ end
 
 def pierwsze(n)
   result = []
-  i = 2
-  while i <= n
+  (2..n).each do |i|
     if pierwsza(i)
       result.push(i)
     end
-    i += 1
   end
   return result
 end
