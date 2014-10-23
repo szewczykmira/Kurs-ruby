@@ -21,4 +21,5 @@ def rozklad(n)
   temp.push([[_czynnik, zliczacz]])
 end
 
+
 print rozklad(756)
