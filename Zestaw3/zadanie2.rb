@@ -1,23 +1,6 @@
-def pierwsza(n)
-  _czynnik =2
-  while _czynnik <= Math.sqrt(n)
-    if n%_czynnik == 0
-      return false
-    else
-      _czynnik += 1
-    end
-  end
-  return true
-end
-
+require 'prime'
 def pierwsze(n)
-  result = []
-  (2..n).each do |i|
-    if pierwsza(i)
-      result.push(i)
-    end
-  end
-  return result
+  [2]+(3..n).select{|x| (2..Math.sqrt(x).ceil).each{|j| x%j==0 ? break : j}}
 end
 
 print pierwsze(15)
