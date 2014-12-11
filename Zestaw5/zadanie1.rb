@@ -65,8 +65,3 @@ class Przeglader
     end
   end
 end
-
-p = Przeglader.new
-puts p.przeglad('http://www.ii.uni.wroc.pl/cms/', 3, lambda{ |x| return x })
-#puts p.page_summary('http://www.thecamels.org/')
-#puts p.page_weight('http://www.thecamels.org/')
