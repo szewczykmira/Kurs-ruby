@@ -6,6 +6,7 @@ class Person
 end
 
 class PhoneBookDb
+  attr_accessor :database
   def initialize(file='data.yaml')
     @file = file
     if File.exists? @file
@@ -73,6 +74,9 @@ class PhoneBookGUI
     @listbox = TkListbox.new(@root) {
       pack
     }.grid(:row => 1, :rowspan => 4)
+    @db.database.each do |person|
+      @listbox.insert 0, person.name
+    end 
     # wyszukiwanie ludzi
     TkLabel.new(@root) {
       text 'Szukaj:'
