@@ -88,24 +88,23 @@ class PhoneBookGUI
       pack
     }.grid(:row=>5)
     @szukaj_entry = TkEntry.new(@root) {
-    pack
+      pack
     }.grid(:row => 5, :column => 1)
     TkButton.new(@root) {
       text 'Find'
       pack
     }.grid(:row => 5, :column => 2)
-    @string = TkVariable.new
-    @string.set_string('')
+    @nazwa_var = TkVariable.new()
+    @nazwa_var.value = 'Siema'
     TkLabel.new(@root) {
-      textvariable @string
+      textvariable @nazwa_var
       pack
-    }.grid(:row => 6, :column => 1)
+    }.grid(:row => 8, :column => 1)
     TkLabel.new(@root) {
       text 'Numer'
       pack
     }.grid(:row => 7, :column =>0 )
     @numer_var = TkVariable.new
-    @numer_var.set_string('')
     TkLabel.new(@root) {
       textvariable @numer_var
       pack
@@ -114,6 +113,9 @@ class PhoneBookGUI
   end
   def onSelect
     name = @listbox.curselection
+    name = @listbox.get(name)
+    @nazwa_var.value = name
+    puts @nazwa_var.to_s
   end
   def add
     @db.add_contact(@nazwa_entry.value.to_s, @numer_entry.value.to_i)
