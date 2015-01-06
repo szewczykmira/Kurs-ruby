@@ -58,6 +58,12 @@ class PhoneBookGUI
     TkLabel.new(@root) {
       text 'Numer'
       pack
+    }.grid(:row => 7, :column =>0 )
+    @numer_var = TkVariable.new
+    @numer_var.set_string('')
+    TkLabel.new(@root) {
+      textvariable @numer_var
+      pack
     }.grid(:row => 7, :column => 1)
     Tk.mainloop
   end
