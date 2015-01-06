@@ -3,10 +3,14 @@ require 'yaml'
 
 class Person
   attr_accessor :name, :phonenumber
+  def initialize(name, phone)
+    @name = name
+    @phonenumber = phone
+  end
 end
 
 class PhoneBookDb
-  attr_accessor :database
+  attr_accessor :database, :add_contact, :save
   def initialize(file='data.yaml')
     @file = file
     if File.exists? @file
@@ -30,7 +34,6 @@ class PhoneBookDb
       end
     end
   end
-  private
   def save
     open(@file, 'w') { |f| YAML.dump(@database,f)}
   end
@@ -62,10 +65,11 @@ class PhoneBookGUI
     @numer_entry = TkEntry.new(@root) {
       pack
     }.grid(:row => 2, :column =>2)
-    TkButton.new(@root){
+    @but = TkButton.new(@root){
       text 'Add'
       pack
     }.grid(:row => 4, :column=>2)
+    @but.command { self.add }
     # lista kontaktów
     TkLabel.new(@root) {
       text 'Lista kontaktow'
@@ -74,9 +78,10 @@ class PhoneBookGUI
     @listbox = TkListbox.new(@root) {
       pack
     }.grid(:row => 1, :rowspan => 4)
-    @db.database.each do |person|
-      @listbox.insert 0, person.name
-    end 
+    @db.database.each do |person,value|
+      @listbox.insert 0, person
+    end
+    @listbox.bind '<ListboxSelect>', proc{onSelect}
     # wyszukiwanie ludzi
     TkLabel.new(@root) {
       text 'Szukaj:'
@@ -106,6 +111,13 @@ class PhoneBookGUI
       pack
     }.grid(:row => 7, :column => 1)
     Tk.mainloop
+  end
+  def onSelect
+    name = @listbox.curselection
+  end
+  def add
+    @db.add_contact(@nazwa_entry.value.to_s, @numer_entry.value.to_i)
+    @listbox.insert 0, @nazwa_entry.value
   end
 end
 
