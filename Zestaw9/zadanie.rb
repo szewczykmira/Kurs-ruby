@@ -16,6 +16,22 @@ class PhoneBookDb
   end
   def add_contact(key, phonenumber)
     @database[key] = Person.new(key, phonenumber)
+    self.save
+  end
+  def delete_contact(key)
+    @database.delete(key)
+    self.save
+  end
+  def find_contact(key)
+    @database.each do |ikey|
+      if ikey == key
+        @database[key]
+      end
+    end
+  end
+  private
+  def save
+    open(@file, 'w') { |f| YAML.dump(@database,f)}
   end
 end
 
