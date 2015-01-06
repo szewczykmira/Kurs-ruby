@@ -1,7 +1,27 @@
 require 'tk'
+require 'yaml'
+
+class Person
+  attr_accessor :name, :phonenumber
+end
+
+class PhoneBookDb
+  def initialize(file='data.yaml')
+    @file = file
+    if File.exists? @file
+      @database = open(@file, 'r') { |f| YAML.load(f) }
+    else
+      @database = {}
+    end
+  end
+  def add_contact(key, phonenumber)
+    @database[key] = Person.new(key, phonenumber)
+  end
+end
 
 class PhoneBookGUI
   def initialize
+    @db = PhoneBookDb.new
     @root = TkRoot.new {
     title 'PhoneBook'
     geometry '500x500'
